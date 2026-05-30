@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marin Industries | Soluciones digitales para negocios locales</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración básica de Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: "#FFC327",
+            brandBlue: "#0A1A6F",
+            brandDark: "#0A1A6F",
+            brandBlueDeep: "#06124F",
+            brandAccent: "#FFC327",
+            brandAccentSoft: "#FFF1BF",
+            brandAccentHover: "#FFD65C",
+            brandLight: "#F8FAFC",
+            brandText: "#1E293B"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-brandLight text-brandText">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center font-bold">
+          MI
+        </div>
+        <div>
+          <p class="font-bold text-brandDark leading-none">Marin Industries</p>
+          <span class="text-xs text-slate-500">Tecnología para negocios locales</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#nosotros" class="hover:text-brandAccent transition">Quiénes somos</a>
+        <a href="#servicios" class="hover:text-brandAccent transition">Servicios</a>
+        <a href="#casos" class="hover:text-brandAccent transition">Casos de éxito</a>
+        <a href="#contacto" class="hover:text-brandAccent transition">Contacto</a>
+      </nav>
+
+      <button id="menuBtn" class="md:hidden text-brandDark" aria-label="Abrir menú">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-200 px-6 py-4">
+      <nav class="flex flex-col gap-4 text-sm font-medium">
+        <a href="#nosotros" class="mobile-link">Quiénes somos</a>
+        <a href="#servicios" class="mobile-link">Servicios</a>
+        <a href="#casos" class="mobile-link">Casos de éxito</a>
+        <a href="#contacto" class="mobile-link">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="pt-32 pb-20 bg-gradient-to-br from-brandDark via-brandBlue to-brandBlueDeep text-white">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+
+      <div class="fade-in">
+        <span class="inline-block mb-5 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm">
+          Transformación digital para negocios locales
+        </span>
+
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+          Soluciones tecnológicas para negocios que quieren crecer.
+        </h1>
+
+        <p class="text-lg text-slate-200 mb-8 max-w-xl">
+          En Marin Industries ayudamos a pequeños negocios, emprendedores y comercios locales a modernizar sus procesos
+          mediante sistemas de gestión, aplicaciones móviles y sitios web adaptados a sus necesidades reales.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#contacto"
+            class="px-6 py-3 rounded-xl bg-brandAccent text-brandDark font-semibold text-center hover:bg-brandAccentHover transition">
+            Solicitar una propuesta
+          </a>
+
+          <a href="#servicios"
+            class="px-6 py-3 rounded-xl border border-white/30 text-white font-semibold text-center hover:bg-white/10 transition">
+            Ver servicios
+          </a>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
+          <div class="bg-white rounded-2xl p-6 text-brandDark">
+            <p class="text-sm text-slate-500 mb-2">Soluciones para</p>
+            <h2 class="text-2xl font-bold mb-6">Negocios en crecimiento</h2>
+
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brandAccentSoft text-brandDark flex items-center justify-center font-bold">
+                  1
+                </div>
+                <div>
+                  <h3 class="font-semibold">Administrar mejor</h3>
+                  <p class="text-sm text-slate-500">Control de ventas, inventario, clientes y reportes.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-brandBlue/10 text-brandBlue flex items-center justify-center font-bold">
+                  2
+                </div>
+                <div>
+                  <h3 class="font-semibold">Vender más</h3>
+                  <p class="text-sm text-slate-500">Sitios web, catálogos digitales y canales de contacto.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brandLight text-brandDark flex items-center justify-center font-bold">
+                  3
+                </div>
+                <div>
+                  <h3 class="font-semibold">Atender mejor</h3>
+                  <p class="text-sm text-slate-500">Aplicaciones y herramientas para clientes y personal.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Quiénes somos -->
+  <section id="nosotros" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+
+      <div class="fade-in">
+        <span class="inline-block rounded-full bg-brandAccentSoft px-3 py-1 text-brandDark font-semibold uppercase text-sm tracking-wide">Quiénes somos</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brandDark mt-3 mb-6">
+          Una empresa nacida del esfuerzo, la visión y el deseo de ayudar.
+        </h2>
+
+        <p class="text-slate-600 leading-relaxed mb-5">
+          Marin Industries nace de una historia familiar marcada por la determinación de construir algo propio y servir
+          con honestidad a la comunidad. Su nombre honra el legado del abuelo del fundador, quien enseñó el valor del
+          trabajo, la perseverancia y el compromiso con los demás.
+        </p>
+
+        <p class="text-slate-600 leading-relaxed">
+          Inspirada en esa historia, la empresa surge al identificar una necesidad muy presente en pequeños negocios: la
+          dificultad de adaptarse a la era digital. Por ello, Marin Industries busca acompañar a comercios,
+          emprendedores y familias en su transformación digital mediante herramientas tecnológicas accesibles, útiles y
+          adaptadas a su realidad.
+        </p>
+      </div>
+
+      <div class="fade-in grid sm:grid-cols-2 gap-6">
+        <div class="bg-brandLight rounded-2xl p-6 border border-slate-200">
+          <h3 class="text-xl font-bold text-brandDark mb-3">Misión</h3>
+          <p class="text-slate-600">
+            Llegar a los negocios locales de la región con soluciones tecnológicas inteligentes e innovadoras que
+            faciliten sus servicios, tanto para su personal como para sus clientes.
+          </p>
+        </div>
+
+        <div class="bg-brandDark rounded-2xl p-6 text-white">
+          <h3 class="text-xl font-bold mb-3">Visión</h3>
+          <p class="text-slate-200">
+            Utilizar tecnologías aplicadas para la sustentabilidad y preservación del ecosistema global, mejorando la
+            calidad de vida de la sociedad.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="py-16 bg-brandLight">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center max-w-3xl mx-auto mb-12 fade-in">
+        <span class="inline-block rounded-full bg-brandAccentSoft px-3 py-1 text-brandDark font-semibold uppercase text-sm tracking-wide">Nuestros principios</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brandDark mt-3">
+          Tecnología con propósito humano
+        </h2>
+        <p class="text-slate-600 mt-4">
+          No se trata solo de crear software. Se trata de entender los problemas reales de cada negocio y construir
+          herramientas que sí puedan usar en su día a día.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="fade-in bg-white p-6 rounded-2xl border border-slate-200">
+          <h3 class="font-bold text-xl text-brandDark mb-3">Honestidad</h3>
+          <p class="text-slate-600">Propuestas claras, soluciones realistas y comunicación directa durante todo el
+            proceso.</p>
+        </div>
+
+        <div class="fade-in bg-white p-6 rounded-2xl border border-slate-200">
+          <h3 class="font-bold text-xl text-brandDark mb-3">Innovación accesible</h3>
+          <p class="text-slate-600">Tecnología adaptada a las posibilidades y necesidades de cada negocio local.</p>
+        </div>
+
+        <div class="fade-in bg-white p-6 rounded-2xl border border-slate-200">
+          <h3 class="font-bold text-xl text-brandDark mb-3">Acompañamiento</h3>
+          <p class="text-slate-600">Apoyo antes, durante y después de implementar una solución digital.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="max-w-3xl mb-12 fade-in">
+        <span class="inline-block rounded-full bg-brandAccentSoft px-3 py-1 text-brandDark font-semibold uppercase text-sm tracking-wide">Qué hacemos</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brandDark mt-3 mb-4">
+          Soluciones digitales para administrar, vender y crecer.
+        </h2>
+        <p class="text-slate-600">
+          Diseñamos herramientas tecnológicas enfocadas en resolver problemas concretos de operación, atención y
+          presencia digital.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <article class="fade-in group bg-brandLight p-6 rounded-2xl border border-slate-200 hover:shadow-xl transition">
+          <div class="w-12 h-12 rounded-xl bg-brandAccentSoft text-brandDark flex items-center justify-center mb-5">
+            ⚙️
+          </div>
+          <h3 class="text-xl font-bold text-brandDark mb-3">Sistemas de gestión</h3>
+          <p class="text-slate-600">
+            Plataformas para controlar ventas, inventarios, clientes, servicios, reportes y operaciones internas.
+          </p>
+        </article>
+
+        <article class="fade-in group bg-brandLight p-6 rounded-2xl border border-slate-200 hover:shadow-xl transition">
+          <div class="w-12 h-12 rounded-xl bg-brandBlue/10 text-brandBlue flex items-center justify-center mb-5">
+            📱
+          </div>
+          <h3 class="text-xl font-bold text-brandDark mb-3">Aplicaciones móviles</h3>
+          <p class="text-slate-600">
+            Apps para mejorar la comunicación con clientes, facilitar pedidos, registrar servicios o administrar
+            procesos.
+          </p>
+        </article>
+
+        <article class="fade-in group bg-brandLight p-6 rounded-2xl border border-slate-200 hover:shadow-xl transition">
+          <div class="w-12 h-12 rounded-xl bg-brandLight text-brandDark flex items-center justify-center mb-5">
+            🌐
+          </div>
+          <h3 class="text-xl font-bold text-brandDark mb-3">Sitios web</h3>
+          <p class="text-slate-600">
+            Páginas modernas, responsivas y enfocadas en presentar servicios, generar confianza y atraer clientes.
+          </p>
+        </article>
+
+        <article class="fade-in group bg-brandLight p-6 rounded-2xl border border-slate-200 hover:shadow-xl transition">
+          <div class="w-12 h-12 rounded-xl bg-brandAccentSoft text-brandDark flex items-center justify-center mb-5">
+            🔁
+          </div>
+          <h3 class="text-xl font-bold text-brandDark mb-3">Automatización</h3>
+          <p class="text-slate-600">
+            Digitalización de tareas repetitivas para ahorrar tiempo, reducir errores y mejorar la operación diaria.
+          </p>
+        </article>
+
+        <article class="fade-in group bg-brandLight p-6 rounded-2xl border border-slate-200 hover:shadow-xl transition">
+          <div class="w-12 h-12 rounded-xl bg-brandBlue/10 text-brandBlue flex items-center justify-center mb-5">
+            📊
+          </div>
+          <h3 class="text-xl font-bold text-brandDark mb-3">Reportes y análisis</h3>
+          <p class="text-slate-600">
+            Información clara para tomar mejores decisiones sobre ventas, clientes, productos o servicios.
+          </p>
+        </article>
+
+        <article class="fade-in group bg-brandLight p-6 rounded-2xl border border-slate-200 hover:shadow-xl transition">
+          <div class="w-12 h-12 rounded-xl bg-brandLight text-brandDark flex items-center justify-center mb-5">
+            🤝
+          </div>
+          <h3 class="text-xl font-bold text-brandDark mb-3">Consultoría tecnológica</h3>
+          <p class="text-slate-600">
+            Orientación para elegir qué herramientas digitales necesita realmente cada negocio.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Casos de éxito -->
+  <section id="casos" class="py-20 bg-brandLight">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center max-w-3xl mx-auto mb-12 fade-in">
+        <span class="inline-block rounded-full bg-brandAccentSoft px-3 py-1 text-brandDark font-semibold uppercase text-sm tracking-wide">Casos de éxito</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brandDark mt-3 mb-4">
+          Proyectos que impulsan la transformación digital
+        </h2>
+        <p class="text-slate-600">
+          Estos ejemplos pueden ajustarse posteriormente con proyectos reales, métricas, nombres de clientes y
+          resultados comprobables.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <article
+          class="fade-in bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
+          <div
+            class="h-40 bg-gradient-to-br from-brandBlue to-brandDark flex items-center justify-center text-white text-5xl">
+            🧾
+          </div>
+          <div class="p-6">
+            <span class="inline-block rounded-full bg-brandAccentSoft px-2 py-1 text-sm text-brandDark font-semibold">Sistema de gestión</span>
+            <h3 class="text-xl font-bold text-brandDark mt-2 mb-3">
+              Control de ventas e inventario
+            </h3>
+            <p class="text-slate-600 mb-4">
+              Desarrollo de una plataforma para registrar ventas, controlar productos y consultar reportes básicos del
+              negocio.
+            </p>
+            <ul class="text-sm text-slate-500 space-y-2">
+              <li>• Menos registros manuales</li>
+              <li>• Mejor control de productos</li>
+              <li>• Información más clara para decidir</li>
+            </ul>
+          </div>
+        </article>
+
+        <article
+          class="fade-in bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
+          <div
+            class="h-40 bg-gradient-to-br from-brandDark to-brandAccent flex items-center justify-center text-white text-5xl">
+            📲
+          </div>
+          <div class="p-6">
+            <span class="inline-block rounded-full bg-brandAccentSoft px-2 py-1 text-sm text-brandDark font-semibold">Aplicación móvil</span>
+            <h3 class="text-xl font-bold text-brandDark mt-2 mb-3">
+              App para pedidos y atención
+            </h3>
+            <p class="text-slate-600 mb-4">
+              Aplicación diseñada para que los clientes puedan consultar servicios, realizar solicitudes y comunicarse
+              con el negocio.
+            </p>
+            <ul class="text-sm text-slate-500 space-y-2">
+              <li>• Atención más rápida</li>
+              <li>• Canal directo con clientes</li>
+              <li>• Mejor experiencia de usuario</li>
+            </ul>
+          </div>
+        </article>
+
+        <article
+          class="fade-in bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
+          <div
+            class="h-40 bg-gradient-to-br from-brandBlue to-brandBlueDeep flex items-center justify-center text-white text-5xl">
+            💻
+          </div>
+          <div class="p-6">
+            <span class="inline-block rounded-full bg-brandAccentSoft px-2 py-1 text-sm text-brandDark font-semibold">Sitio web</span>
+            <h3 class="text-xl font-bold text-brandDark mt-2 mb-3">
+              Presencia digital profesional
+            </h3>
+            <p class="text-slate-600 mb-4">
+              Landing page responsiva para presentar servicios, generar confianza y facilitar el contacto con nuevos
+              clientes.
+            </p>
+            <ul class="text-sm text-slate-500 space-y-2">
+              <li>• Imagen más profesional</li>
+              <li>• Mayor visibilidad</li>
+              <li>• Contacto más accesible</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="max-w-3xl mb-12 fade-in">
+        <span class="inline-block rounded-full bg-brandAccentSoft px-3 py-1 text-brandDark font-semibold uppercase text-sm tracking-wide">Cómo trabajamos</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-brandDark mt-3 mb-4">
+          Un proceso claro desde la idea hasta la implementación.
+        </h2>
+        <p class="text-slate-600">
+          Cada solución inicia entendiendo el negocio, sus problemas y sus objetivos. Después se diseña una herramienta
+          útil, realista y escalable.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-5 gap-5">
+
+        <div class="fade-in bg-brandLight p-5 rounded-2xl border border-slate-200">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brandAccent text-brandDark font-bold">01</span>
+          <h3 class="font-bold text-brandDark mt-2 mb-2">Diagnóstico</h3>
+          <p class="text-sm text-slate-600">Analizamos necesidades, procesos y oportunidades de mejora.</p>
+        </div>
+
+        <div class="fade-in bg-brandLight p-5 rounded-2xl border border-slate-200">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brandAccent text-brandDark font-bold">02</span>
+          <h3 class="font-bold text-brandDark mt-2 mb-2">Propuesta</h3>
+          <p class="text-sm text-slate-600">Definimos la solución, alcance, funcionalidades y prioridades.</p>
+        </div>
+
+        <div class="fade-in bg-brandLight p-5 rounded-2xl border border-slate-200">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brandAccent text-brandDark font-bold">03</span>
+          <h3 class="font-bold text-brandDark mt-2 mb-2">Desarrollo</h3>
+          <p class="text-sm text-slate-600">Construimos la herramienta con enfoque práctico y funcional.</p>
+        </div>
+
+        <div class="fade-in bg-brandLight p-5 rounded-2xl border border-slate-200">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brandAccent text-brandDark font-bold">04</span>
+          <h3 class="font-bold text-brandDark mt-2 mb-2">Implementación</h3>
+          <p class="text-sm text-slate-600">Instalamos, configuramos y capacitamos al equipo del negocio.</p>
+        </div>
+
+        <div class="fade-in bg-brandLight p-5 rounded-2xl border border-slate-200">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brandAccent text-brandDark font-bold">05</span>
+          <h3 class="font-bold text-brandDark mt-2 mb-2">Acompañamiento</h3>
+          <p class="text-sm text-slate-600">Damos seguimiento para mejorar y ajustar la solución.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contacto" class="py-20 bg-brandDark text-white">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+
+      <div class="fade-in">
+        <span class="text-brandAccent font-semibold uppercase text-sm tracking-wide">Contacto</span>
+        <h2 class="text-3xl md:text-5xl font-bold mt-3 mb-6">
+          Digitaliza tu negocio con una solución hecha a tu medida.
+        </h2>
+        <p class="text-slate-300 max-w-xl">
+          Si tienes un negocio local y quieres mejorar tu administración, atención o presencia digital, Marin Industries
+          puede ayudarte a dar el siguiente paso.
+        </p>
+      </div>
+
+      <div class="fade-in bg-white text-brandDark rounded-3xl p-6 md:p-8">
+        <h3 class="text-2xl font-bold mb-4">Solicita una propuesta</h3>
+        <p class="text-slate-600 mb-6">
+          Completa estos datos para iniciar una conversación sobre las necesidades de tu negocio.
+        </p>
+
+        <form class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" for="nombre">Nombre</label>
+            <input id="nombre" type="text" placeholder="Tu nombre"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" for="negocio">Negocio</label>
+            <input id="negocio" type="text" placeholder="Nombre de tu negocio"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" for="servicio">Servicio de interés</label>
+            <select id="servicio"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent">
+              <option>Sitio web</option>
+              <option>Sistema de gestión</option>
+              <option>Aplicación móvil</option>
+              <option>Automatización</option>
+              <option>Consultoría tecnológica</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2" for="mensaje">Mensaje</label>
+            <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesita tu negocio"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent"></textarea>
+          </div>
+
+          <button type="submit"
+            class="w-full px-6 py-3 rounded-xl bg-brandAccent text-brandDark font-bold hover:bg-brandAccentHover transition">
+            Enviar solicitud
+          </button>
+
+          <p class="text-xs text-slate-500">
+            Nota: este formulario es visual. Para hacerlo funcional se debe conectar a un backend, correo o WhatsApp.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brandBlueDeep text-slate-300 py-8">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-4">
+      <p>© 2026 Marin Industries. Todos los derechos reservados.</p>
+      <p>Soluciones digitales para negocios locales.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Menú móvil
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // Animaciones al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    document.querySelectorAll(".fade-in").forEach(element => {
+      observer.observe(element);
+    });
+
+    // Evitar envío real del formulario por ahora
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      alert("Gracias por tu interés. Esta sección puede conectarse después a correo, WhatsApp o una base de datos.");
+    });
+  </script>
+
+</body>
+
+</html>
