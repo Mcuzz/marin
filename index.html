@@ -496,47 +496,49 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium mb-2" for="contacto">Teléfono o WhatsApp</label>
-            <input id="contacto" type="text" placeholder="Tu contacto" required
+            <label class="block text-sm font-medium mb-2" for="telefono">Teléfono o WhatsApp</label>
+            <input id="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej. 662 123 4567" required
               class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent" />
           </div>
 
           <div>
             <label class="block text-sm font-medium mb-2" for="negocio">Nombre de la empresa o negocio</label>
-            <input id="negocio" type="text" placeholder="Nombre de tu negocio"
+            <input id="negocio" type="text" placeholder="Nombre de tu negocio" required
               class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent" />
           </div>
 
           <div>
             <label class="block text-sm font-medium mb-2" for="servicio">Servicio de interés</label>
-            <select id="servicio"
+            <select id="servicio" required
               class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent">
-              <option>Proyectos de ingeniería</option>
-              <option>Sistema de gestión</option>
-              <option>Aplicación móvil</option>
-              <option>Sitio web</option>
-              <option>Automatización</option>
-              <option>Servicios técnicos</option>
-              <option>Otro</option>
+              <option value="" selected disabled>Selecciona una opción</option>
+              <option value="Proyectos de ingeniería">Proyectos de ingeniería</option>
+              <option value="Sistema de gestión">Sistema de gestión</option>
+              <option value="Aplicación móvil">Aplicación móvil</option>
+              <option value="Sitio web">Sitio web</option>
+              <option value="Automatización">Automatización</option>
+              <option value="Servicios técnicos">Servicios técnicos</option>
+              <option value="Otro">Otro</option>
             </select>
           </div>
 
           <div>
             <label class="block text-sm font-medium mb-2" for="problema">Problema a resolver</label>
-            <select id="problema"
+            <select id="problema" required
               class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent">
-              <option>Administrativos</option>
-              <option>Producción</option>
-              <option>Control</option>
-              <option>Ventas e inventario</option>
-              <option>Presencia digital</option>
-              <option>Otro</option>
+              <option value="" selected disabled>Selecciona una opción</option>
+              <option value="Administrativos">Administrativos</option>
+              <option value="Producción">Producción</option>
+              <option value="Control">Control</option>
+              <option value="Ventas e inventario">Ventas e inventario</option>
+              <option value="Presencia digital">Presencia digital</option>
+              <option value="Otro">Otro</option>
             </select>
           </div>
 
           <div>
             <label class="block text-sm font-medium mb-2" for="mensaje">Descripción breve</label>
-            <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesita tu negocio"
+            <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesita tu negocio" required
               class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandAccent"></textarea>
           </div>
 
@@ -599,29 +601,69 @@
     const form = document.querySelector("form");
     const formStatus = document.getElementById("formStatus");
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+    if (form) {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
 
-      const nombre = document.getElementById("nombre").value.trim();
-      const contacto = document.getElementById("contacto").value.trim();
-      const negocio = document.getElementById("negocio").value.trim();
-      const servicio = document.getElementById("servicio").value;
-      const problema = document.getElementById("problema").value;
-      const mensaje = document.getElementById("mensaje").value.trim();
+        const nombreInput = document.getElementById("nombre");
+        const contactoInput = document.getElementById("telefono");
+        const negocioInput = document.getElementById("negocio");
+        const servicioInput = document.getElementById("servicio");
+        const problemaInput = document.getElementById("problema");
+        const mensajeInput = document.getElementById("mensaje");
 
-      const asunto = `Solicitud de contacto - ${negocio || 'Sin empresa'}`;
-      const textoWhatsApp = `Hola Marin Industries. Soy ${nombre}. Contacto: ${contacto}. Empresa: ${negocio || 'No especificada'}. Servicio de interés: ${servicio}. Problema a resolver: ${problema}. ${mensaje ? `Detalles: ${mensaje}` : ''}`;
-      const cuerpoCorreo = `Hola Marin Industries,\n\nNombre: ${nombre}\nContacto: ${contacto}\nEmpresa: ${negocio || 'No especificada'}\nServicio de interés: ${servicio}\nProblema a resolver: ${problema}\n\nDescripción: ${mensaje || 'Sin descripción adicional'}`;
+        const nombre = (nombreInput?.value || "").trim();
+        const contacto = (contactoInput?.value || "").trim();
+        const negocio = (negocioInput?.value || "").trim();
+        const servicio = (servicioInput?.value || "").trim();
+        const problema = (problemaInput?.value || "").trim();
+        const mensaje = (mensajeInput?.value || "").trim();
 
-      const whatsappUrl = `https://wa.me/526624059283?text=${encodeURIComponent(textoWhatsApp)}`;
-      const mailtoUrl = `mailto:jose.dominguez.hurtado@ues.mx?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoCorreo)}`;
+        const missingFields = [];
+        if (!nombre) missingFields.push("nombre completo");
+        if (!contacto) {
+          missingFields.push("teléfono o WhatsApp");
+        } else {
+          const phoneFormatPattern = /^\+?[0-9\s().-]+$/;
+          const phoneDigits = contacto.replace(/\D/g, "");
+          if (!phoneFormatPattern.test(contacto) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+            missingFields.push("un teléfono o WhatsApp válido");
+          }
+        }
+        if (!negocio) missingFields.push("nombre de la empresa o negocio");
+        if (!servicio) missingFields.push("servicio de interés");
+        if (!problema) missingFields.push("problema a resolver");
+        if (!mensaje) missingFields.push("descripción breve");
 
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      window.location.href = mailtoUrl;
+        if (missingFields.length > 0) {
+          if (formStatus) {
+            formStatus.textContent = `Completa los siguientes campos antes de enviar: ${missingFields.join(", ")}.`;
+            formStatus.className = "text-sm text-red-600";
+          }
+          return;
+        }
 
-      formStatus.textContent = `Gracias, ${nombre}. Tu solicitud fue preparada para enviarse a nuestro equipo.`;
-      form.reset();
-    });
+        const asunto = `Solicitud de contacto - ${negocio}`;
+        const textoWhatsApp = `Hola Marin Industries. Soy ${nombre}. Contacto: ${contacto}. Empresa: ${negocio}. Servicio de interés: ${servicio}. Problema a resolver: ${problema}. Detalles: ${mensaje}`;
+        const cuerpoCorreo = `Hola Marin Industries,\n\nNombre: ${nombre}\nContacto: ${contacto}\nEmpresa: ${negocio}\nServicio de interés: ${servicio}\nProblema a resolver: ${problema}\n\nDescripción: ${mensaje}`;
+
+        const whatsappUrl = `https://wa.me/526624059283?text=${encodeURIComponent(textoWhatsApp)}`;
+        const emailTo = "contacto@marinindustries.com";
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailTo)}&su=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoCorreo)}`;
+        const mailtoUrl = `mailto:${emailTo}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoCorreo)}`;
+
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+        window.open(gmailUrl, "_blank", "noopener,noreferrer");
+        window.location.href = mailtoUrl;
+
+        if (formStatus) {
+          formStatus.textContent = `Gracias, ${nombre}. Tu solicitud fue preparada para enviarse a nuestro equipo.`;
+          formStatus.className = "text-sm text-slate-600";
+        }
+
+        form.reset();
+      });
+    }
   </script>
 
 </body>
