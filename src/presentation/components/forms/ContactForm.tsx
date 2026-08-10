@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { createWhatsappContactLink } from "@/src/application/contact/use-cases/create-whatsapp-contact-link.use-case";
 
 const services = [
   "Proyectos de ingenieria",
@@ -30,40 +31,23 @@ export function ContactForm() {
     const form = event.currentTarget;
     const data = new FormData(form);
 
-    const nombre = String(data.get("nombre") || "").trim();
-    const contacto = String(data.get("telefono") || "").trim();
-    const negocio = String(data.get("negocio") || "").trim();
-    const servicio = String(data.get("servicio") || "").trim();
-    const problema = String(data.get("problema") || "").trim();
-    const mensaje = String(data.get("mensaje") || "").trim();
+    const result = createWhatsappContactLink({
+      nombre: String(data.get("nombre") || ""),
+      telefono: String(data.get("telefono") || ""),
+      negocio: String(data.get("negocio") || ""),
+      servicio: String(data.get("servicio") || ""),
+      problema: String(data.get("problema") || ""),
+      mensaje: String(data.get("mensaje") || "")
+    });
 
-    const missingFields: string[] = [];
-    if (!nombre) missingFields.push("nombre completo");
-    if (!contacto) {
-      missingFields.push("telefono o WhatsApp");
-    } else {
-      const phoneFormatPattern = /^\+?[0-9\s().-]+$/;
-      const phoneDigits = contacto.replace(/\D/g, "");
-      if (!phoneFormatPattern.test(contacto) || phoneDigits.length < 7 || phoneDigits.length > 15) {
-        missingFields.push("un telefono o WhatsApp valido");
-      }
-    }
-    if (!negocio) missingFields.push("nombre de la empresa o negocio");
-    if (!servicio) missingFields.push("servicio de interes");
-    if (!problema) missingFields.push("problema a resolver");
-    if (!mensaje) missingFields.push("descripcion breve");
-
-    if (missingFields.length > 0) {
-      setStatus(`Completa los siguientes campos antes de enviar: ${missingFields.join(", ")}.`);
+    if (!result.ok) {
+      setStatus(result.error);
       setStatusType("error");
       return;
     }
 
-    const textoWhatsApp = `Hola Marin Industries. Soy ${nombre}. Contacto: ${contacto}. Empresa: ${negocio}. Servicio de interes: ${servicio}. Problema a resolver: ${problema}. Detalles: ${mensaje}`;
-    const whatsappUrl = `https://wa.me/526624059283?text=${encodeURIComponent(textoWhatsApp)}`;
-
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    setStatus(`Gracias, ${nombre}. Tu solicitud fue preparada para enviarse a nuestro equipo.`);
+    window.open(result.value, "_blank", "noopener,noreferrer");
+    setStatus("Gracias. Tu solicitud fue preparada para enviarse a nuestro equipo.");
     setStatusType("default");
     form.reset();
   }
