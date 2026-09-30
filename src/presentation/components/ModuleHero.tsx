@@ -6,7 +6,7 @@ type ModuleHeroProps = {
 
 export function ModuleHero({ eyebrow, title, description }: ModuleHeroProps) {
   return (
-    <section className="bg-gradient-to-br from-brandDark via-brandBlue to-brandBlueDeep pt-32 text-white">
+    <section className="bg-gradient-to-br from-brandDark via-brandBlue to-brandBlueDeep pt-32 text-white pb-20">
       <div className="section-shell py-16">
         <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm">
           {eyebrow}

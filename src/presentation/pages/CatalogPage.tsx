@@ -11,7 +11,7 @@ export function CatalogPage({ catalog }: CatalogPageProps) {
   return (
     <PageShell>
       <main>
-        <ModuleHero
+        <ModuleHero 
           eyebrow="Catalogo y costos"
           title="Servicios con costos base para iniciar conversaciones"
           description="Version estatica para mostrar rangos y ordenar expectativas mientras administracion define reglas de actualizacion."

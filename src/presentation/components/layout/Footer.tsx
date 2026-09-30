@@ -9,11 +9,11 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-brandBlueDeep py-8 text-slate-300">
+    <footer className="bg-brandBlueDeep py-8 text-brandText/80">
       <div className="section-shell flex flex-col justify-between gap-5 md:flex-row md:items-center">
         <div>
-          <p>© 2026 Marin Industries. Todos los derechos reservados.</p>
-          <p className="text-sm text-slate-400">Soluciones digitales para negocios locales.</p>
+          <p className="text-brandText">© 2026 Marin Industries. Todos los derechos reservados.</p>
+          <p className="text-sm text-brandText/60">Soluciones digitales para negocios locales.</p>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
           {footerLinks.map((link) => (

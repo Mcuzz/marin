@@ -1,61 +1,107 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Quienes somos", href: "/#nosotros" },
   { label: "Servicios", href: "/#servicios" },
   { label: "Casos de exito", href: "/#casos" },
-  { label: "Contacto", href: "/#contacto" }
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = !darkMode;
+
+    setDarkMode(nextTheme);
+
+    if (nextTheme) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md">
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-brandLine bg-brandBg">
       <div className="section-shell flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="h-16 w-16 overflow-hidden rounded-full border border-slate-200 bg-white">
+        <Link href="/" className="flex items-center gap-4">
+          <div className="h-10 w-10 overflow-hidden">
             <img
-              src="/assets/logo.jpeg"
+              src="/assets/logo.png"
               alt="Marin Industries Logo"
               className="h-full w-full object-cover"
             />
           </div>
-          <div>
-            <p className="font-bold leading-none text-brandDark">Marin Industries</p>
-            <span className="text-xs text-slate-500">Tecnologia para negocios locales</span>
-          </div>
+
+          <span className="text-sm font-semibold tracking-tight text-brandDark">
+            MARIN INDUSTRIES
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-brandAccent">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex items-center gap-6">
+          <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition hover:text-brandAccent"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <button
-          type="button"
-          className="text-brandDark md:hidden"
-          aria-label="Abrir menu"
-          aria-expanded={open}
-          onClick={() => setOpen((current) => !current)}
-        >
-          <span className="block h-0.5 w-7 bg-current" />
-          <span className="mt-1.5 block h-0.5 w-7 bg-current" />
-          <span className="mt-1.5 block h-0.5 w-7 bg-current" />
-        </button>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={darkMode ? "Activar modo claro" : "Activar modo oscuro"}
+            className="flex h-9 w-9 items-center justify-center border border-brandLine text-brandDark transition hover:border-brandAccent hover:text-brandAccent "
+          >
+            {darkMode ? "☀" : "☾"}
+          </button>
+
+          <button
+            type="button"
+            className="md:hidden"
+            onClick={() => setOpen((prev) => !prev)}
+            aria-label="Abrir menu"
+          >
+            <span className="block h-0.5 w-7 bg-brandDark" />
+            <span className="mt-1.5 block h-0.5 w-7 bg-brandDark" />
+            <span className="mt-1.5 block h-0.5 w-7 bg-brandDark" />
+          </button>
+        </div>
       </div>
 
       {open ? (
-        <div className="border-t border-slate-200 bg-white px-6 py-4 md:hidden">
+        <div className="border-t border-brandLine bg-brandBg px-6 py-4 md:hidden">
           <nav className="flex flex-col gap-4 text-sm font-medium">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="transition hover:text-brandAccent"
+              >
                 {item.label}
               </Link>
             ))}
