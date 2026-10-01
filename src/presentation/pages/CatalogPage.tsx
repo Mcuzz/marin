@@ -3,6 +3,7 @@ import type { ServiceOffering } from "@/src/domain/catalog/service-offering.enti
 import { ModuleHero } from "../components/ModuleHero";
 import { PageShell } from "../components/layout/PageShell";
 
+const pad = (n: number) => String(n).padStart(2, "0");
 type CatalogPageProps = {
   catalog: ServiceOffering[];
 };
@@ -11,30 +12,54 @@ export function CatalogPage({ catalog }: CatalogPageProps) {
   return (
     <PageShell>
       <main>
-        <ModuleHero 
+        <ModuleHero
           eyebrow="Catalogo y costos"
           title="Servicios con costos base para iniciar conversaciones"
           description="Version estatica para mostrar rangos y ordenar expectativas mientras administracion define reglas de actualizacion."
         />
 
-        <section className="py-16">
+        <section data-tone="alt" className="cg-section">
           <div className="section-shell">
-            <div className="grid gap-6 md:grid-cols-2">
-              {catalog.map((item) => (
-                <article key={item.id} className="card p-6">
-                  <p className="text-sm font-bold uppercase tracking-wide text-brandAccent">Servicio</p>
-                  <h2 className="mt-2 text-2xl font-bold text-brandDark">{item.name}</h2>
-                  <p className="mt-4 text-3xl font-bold text-slate-900">{item.price}</p>
-                  <p className="mt-4 leading-relaxed text-slate-600">{item.description}</p>
-                  <Link
-                    href="/cotizacion"
-                    className="mt-6 inline-flex rounded-xl bg-brandAccent px-5 py-3 font-bold text-brandDark"
-                  >
-                    Solicitar cotizacion
-                  </Link>
-                </article>
-              ))}
+            <div className="jo-head">
+              <div>
+                <span className="eyebrow">Servicios</span>
+              </div>
+
+              <p className="jo-count">
+                {pad(catalog.length)} <span>servicios</span>
+              </p>
             </div>
+
+            {catalog.length === 0 ? (
+              <p className="jo-empty">
+                Por ahora no hay servicios en el catálogo.
+              </p>
+            ) : (
+              <div className="cg-grid">
+                {catalog.map((item, i) => (
+                  <article key={item.id} className="cg-card">
+                    <div className="cg-top">
+                      <span className="cg-num">{pad(i + 1)}</span>
+                      <span className="cg-label">Servicio</span>
+                    </div>
+
+                    <h2 className="cg-name">{item.name}</h2>
+
+                    <div className="cg-price">
+                      <small>Precio</small>
+                      <p>{item.price}</p>
+                    </div>
+
+                    <p className="cg-desc">{item.description}</p>
+
+                    <Link href="/cotizacion" className="btn btn-primary cg-btn">
+                      Solicitar cotización
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>

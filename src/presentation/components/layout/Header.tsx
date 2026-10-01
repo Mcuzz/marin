@@ -1,16 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navItems = [
-  { label: "Quienes somos", href: "/#nosotros" },
-  { label: "Servicios", href: "/#servicios" },
-  { label: "Casos de exito", href: "/#casos" },
-  { label: "Contacto", href: "/#contacto" },
+  { label: "Convocatorias", href: "/convocatorias" },
+  { label: "Catálogo", href: "/catalogo" },
+  { label: "Cotización", href: "/cotizacion" },
+  { label: "Recursos humanos", href: "/rh" },
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -40,6 +42,9 @@ export function Header() {
     }
   };
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-brandLine bg-brandBg">
       <div className="section-shell flex items-center justify-between py-4">
@@ -58,12 +63,15 @@ export function Header() {
         </Link>
 
         <div className="flex items-center gap-6">
-          <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+          <nav className="hidden items-center gap-8 text-sm font-medium lg:flex">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition hover:text-brandAccent"
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={`transition hover:text-brandAccent ${
+                  isActive(item.href) ? "text-brandAccent" : "text-brandText"
+                }`}
               >
                 {item.label}
               </Link>
@@ -74,16 +82,17 @@ export function Header() {
             type="button"
             onClick={toggleTheme}
             aria-label={darkMode ? "Activar modo claro" : "Activar modo oscuro"}
-            className="flex h-9 w-9 items-center justify-center border border-brandLine text-brandDark transition hover:border-brandAccent hover:text-brandAccent "
+            className="flex h-9 w-9 items-center justify-center border border-brandLine text-brandDark transition hover:border-brandAccent hover:text-brandAccent"
           >
             {darkMode ? "☀" : "☾"}
           </button>
 
           <button
             type="button"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setOpen((prev) => !prev)}
-            aria-label="Abrir menu"
+            aria-label="Abrir menú"
+            aria-expanded={open}
           >
             <span className="block h-0.5 w-7 bg-brandDark" />
             <span className="mt-1.5 block h-0.5 w-7 bg-brandDark" />
@@ -93,14 +102,16 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-t border-brandLine bg-brandBg px-6 py-4 md:hidden">
+        <div className="border-t border-brandLine bg-brandBg px-6 py-4 lg:hidden">
           <nav className="flex flex-col gap-4 text-sm font-medium">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="transition hover:text-brandAccent"
+                className={`transition hover:text-brandAccent ${
+                  isActive(item.href) ? "text-brandAccent" : "text-brandText"
+                }`}
               >
                 {item.label}
               </Link>

@@ -1,18 +1,30 @@
+import type { ReactNode } from "react";
+
 type ModuleHeroProps = {
   eyebrow: string;
   title: string;
   description: string;
+  children?: ReactNode;
 };
 
-export function ModuleHero({ eyebrow, title, description }: ModuleHeroProps) {
+export function ModuleHero({
+  eyebrow,
+  title,
+  description,
+  children,
+}: ModuleHeroProps) {
   return (
-    <section className="bg-gradient-to-br from-brandDark via-brandBlue to-brandBlueDeep pt-32 text-white pb-20">
-      <div className="section-shell py-16">
-        <span className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm">
-          {eyebrow}
-        </span>
-        <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight md:text-6xl">{title}</h1>
-        <p className="mt-6 max-w-2xl text-lg text-slate-200">{description}</p>
+    <section data-tone="base" className="mh-section">
+      <div className="hero-grid" aria-hidden />
+
+      <div className="section-shell mh-inner">
+        <div>
+          <span className="eyebrow">{eyebrow}</span>
+          <h1 className="h1 mh-title">{title}</h1>
+          <p className="mh-desc">{description}</p>
+        </div>
+
+        {children ? <div className="mh-actions">{children}</div> : null}
       </div>
     </section>
   );

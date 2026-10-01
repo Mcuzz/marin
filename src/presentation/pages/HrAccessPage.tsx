@@ -6,49 +6,96 @@ type HrAccessPageProps = {
   features: HrFeature[];
 };
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
 export function HrAccessPage({ features }: HrAccessPageProps) {
   return (
     <PageShell>
       <main>
         <ModuleHero
           eyebrow="Recursos humanos"
-          title="Area interna para control de expedientes y aptitudes"
-          description="Entrada separada del sitio publico. La logica real debera conectarse a autenticacion y permisos."
+          title="Área interna para control de expedientes y aptitudes"
+          description="Entrada separada del sitio público. La lógica real deberá conectarse a autenticación y permisos."
         />
 
-        <section className="py-16">
-          <div className="section-shell grid gap-8 lg:grid-cols-[0.8fr_1fr]">
-            <div className="card p-6">
-              <h2 className="text-2xl font-bold text-brandDark">Acceso autorizado</h2>
-              <p className="mt-3 text-slate-600">
-                Esta pantalla marca el modulo como privado sin exponer informacion sensible en la landing.
-              </p>
-              <form className="mt-6 space-y-4">
-                <input
-                  type="email"
-                  placeholder="Correo institucional"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3"
-                />
-                <input
-                  type="password"
-                  placeholder="Contrasena"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3"
-                />
-                <button type="button" className="w-full rounded-xl bg-brandAccent px-6 py-3 font-bold text-brandDark">
+        <section data-tone="alt" className="hr-section">
+          <div className="section-shell hr-grid">
+            {/* Acceso */}
+            <div className="qf-card">
+              <span className="jo-status">
+                <i aria-hidden="true" />
+                Acceso restringido
+              </span>
+
+              <div>
+                <h2 className="qa-title" style={{ marginTop: 0 }}>
+                  Acceso autorizado
+                </h2>
+                <p className="qa-text" style={{ marginBottom: 0 }}>
+                  Esta pantalla marca el módulo como privado sin exponer
+                  información sensible en la landing.
+                </p>
+              </div>
+
+              <form className="qf-stack">
+                <div>
+                  <label htmlFor="hr-email" className="qf-label">
+                    Correo institucional
+                  </label>
+                  <input
+                    id="hr-email"
+                    type="email"
+                    autoComplete="username"
+                    placeholder="correo@empresa.com"
+                    className="qf-input"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="hr-password" className="qf-label">
+                    Contraseña
+                  </label>
+                  <input
+                    id="hr-password"
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="Tu contraseña"
+                    className="qf-input"
+                  />
+                </div>
+
+                <button type="button" className="btn btn-primary qf-submit">
                   Entrar
+                  <span aria-hidden="true">→</span>
                 </button>
               </form>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {features.map((feature) => (
-                <div key={feature.id} className="card p-5">
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brandAccent font-bold text-brandDark">
-                    OK
-                  </span>
-                  <p className="mt-4 font-semibold text-brandDark">{feature.label}</p>
-                </div>
-              ))}
+            {/* Funciones del módulo */}
+            <div>
+              <div className="jo-head">
+                <span className="eyebrow">Funciones del módulo</span>
+                <p className="jo-count">
+                  {pad(features.length)} <span>funciones</span>
+                </p>
+              </div>
+
+              <div className="hr-features">
+                {features.map((feature, i) => (
+                  <div key={feature.id} className="hr-feature">
+                    <div className="hr-feature-top">
+                      <span className="hr-check" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                      <span className="jo-num">{pad(i + 1)}</span>
+                    </div>
+
+                    <p className="hr-feature-label">{feature.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

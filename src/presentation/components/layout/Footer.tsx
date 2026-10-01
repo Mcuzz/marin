@@ -9,8 +9,7 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-brandBlueDeep py-8 text-brandText/80">
-      <div className="section-shell flex flex-col justify-between gap-5 md:flex-row md:items-center">
+<footer data-tone="base" className="py-8 text-brandText/80">      <div className="section-shell flex flex-col justify-between gap-5 md:flex-row md:items-center">
         <div>
           <p className="text-brandText">© 2026 Marin Industries. Todos los derechos reservados.</p>
           <p className="text-sm text-brandText/60">Soluciones digitales para negocios locales.</p>

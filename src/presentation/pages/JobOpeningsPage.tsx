@@ -1,10 +1,13 @@
 import type { JobOpening } from "@/src/domain/jobs/job-opening.entity";
 import { ModuleHero } from "../components/ModuleHero";
 import { PageShell } from "../components/layout/PageShell";
+import { LogoutButton } from "../components/auth/LogoutButton";
 
 type JobOpeningsPageProps = {
   openings: JobOpening[];
 };
+
+const pad = (n: number) => String(n).padStart(2, "0");
 
 export function JobOpeningsPage({ openings }: JobOpeningsPageProps) {
   return (
@@ -12,38 +15,52 @@ export function JobOpeningsPage({ openings }: JobOpeningsPageProps) {
       <main>
         <ModuleHero
           eyebrow="Sistema de convocatoria"
-          title="Vacantes y oportunidades de colaboracion"
-          description="Primera version para mostrar oportunidades disponibles mientras se definen formularios, filtros y flujo administrativo."
-        />
+          title="Vacantes y oportunidades de colaboración"
+          description="Primera versión para mostrar oportunidades disponibles mientras se definen formularios, filtros y flujo administrativo."
+        >
+          <LogoutButton />
+        </ModuleHero>
 
-        <section className="py-16">
+        <section data-tone="alt" className="jo-section">
           <div className="section-shell">
-            <div className="mb-8 max-w-3xl">
-              <span className="eyebrow">Publicaciones</span>
-              <h2 className="mt-3 text-3xl font-bold text-brandDark">Convocatorias iniciales</h2>
-              <p className="mt-4 text-slate-600">
-                Estas tarjetas funcionan como estructura visible. Despues pueden conectarse a una base de datos
-                y a un panel administrativo.
+            <div className="jo-head">
+              <div>
+                <span className="eyebrow">Publicaciones</span>
+                <h2 className="jo-title">Convocatorias iniciales</h2>
+              </div>
+
+              <p className="jo-count">
+                {pad(openings.length)} <span>vacantes</span>
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-3">
-              {openings.map((opening) => (
-                <article key={opening.id} className="card p-6">
-                  <div className="mb-4 flex items-center justify-between gap-4">
-                    <span className="rounded-full bg-brandAccentSoft px-3 py-1 text-xs font-bold text-brandDark">
-                      {opening.area}
-                    </span>
-                    <span className="text-xs font-medium text-slate-400">{opening.status}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-brandDark">{opening.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{opening.description}</p>
-                  <button className="mt-6 w-full rounded-xl border border-brandDark px-4 py-3 text-sm font-bold text-brandDark">
-                    Solicitar informacion
-                  </button>
-                </article>
-              ))}
-            </div>
+            {openings.length === 0 ? (
+              <p className="jo-empty">Por ahora no hay convocatorias abiertas.</p>
+            ) : (
+              <div className="jo-grid">
+                {openings.map((opening, i) => (
+                  <article key={opening.id} className="jo-card">
+                    <div className="jo-top">
+                      <span className="jo-num">{pad(i + 1)}</span>
+                      <span className="jo-status">
+                        <i aria-hidden="true" />
+                        {opening.status}
+                      </span>
+                    </div>
+
+                    <span className="jo-area">{opening.area}</span>
+
+                    <h3 className="jo-h3">{opening.title}</h3>
+                    <p className="jo-desc">{opening.description}</p>
+
+                    <button type="button" className="btn btn-ghost jo-btn">
+                      Solicitar información
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
