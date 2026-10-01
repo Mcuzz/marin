@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Soluciones de ingenieria, tecnologia, automatizacion y soporte tecnico para negocios locales e industria.",
   icons: {
-    icon: "/assets/logo.jpeg"
+    icon: "/assets/logo.png"
   }
 };
 
